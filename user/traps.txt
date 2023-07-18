@@ -1,0 +1,6 @@
+q1: 13 is held in a2;
+q2: func g is inlined into func f, func f is inlined into main, so there doesn't exist function call.
+q3: Entrance of printf is 0x630.
+q4: ra is 0x38.
+q5: "He110 World"; 0x726c6400; don't need to set i, cause 57616=0xe110 is trivial.
+q6: y is uncertain, it should be the previous value in the corresponding register.

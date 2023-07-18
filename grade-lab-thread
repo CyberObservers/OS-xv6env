@@ -24,26 +24,26 @@ def test_answers():
     # just a simple sanity check, will be graded manually
     check_answers("answers-thread.txt")
     
-# test the first ph task: add locks to eliminate the missing keys.
-@test(10, "ph_safe")
-def test_ph_safe():
-    subprocess.run(['make', 'ph'], check=True)
-    result = subprocess.run(['./ph', '2'], stdout=subprocess.PIPE, check=True)
+# test the first  task: add locks to eliminate the missing keys.
+@test(10, "_safe")
+def test__safe():
+    subprocess.run(['make', ''], check=True)
+    result = subprocess.run(['./', '2'], stdout=subprocess.PIPE, check=True)
     out = result.stdout.decode("utf-8")
     matches = re.findall(r'^\d+: (\d+) keys missing$', out, re.MULTILINE)
     assert_equal(len(matches), 2)
     assert_equal(int(matches[0]), 0)
     assert_equal(int(matches[1]), 0)
 
-# test the second ph task: locking that allows put() parallelism
-@test(10, "ph_fast")
-def test_ph_fast():
-    subprocess.run(['make', 'ph'], check=True)
-    result = subprocess.run(['./ph', '2'], stdout=subprocess.PIPE, check=True)
+# test the second  task: locking that allows put() parallelism
+@test(10, "_fast")
+def test__fast():
+    subprocess.run(['make', ''], check=True)
+    result = subprocess.run(['./', '2'], stdout=subprocess.PIPE, check=True)
     out = result.stdout.decode("utf-8")
     rate2 = re.findall(r' (\d+) puts.second$', out, re.MULTILINE)
     assert_equal(len(rate2), 1)
-    result = subprocess.run(['./ph', '1'], stdout=subprocess.PIPE)
+    result = subprocess.run(['./', '1'], stdout=subprocess.PIPE)
     out = result.stdout.decode("utf-8")
     rate1 = re.findall(r' (\d+) puts.second$', out, re.MULTILINE)
     assert_equal(len(rate1), 1)
