@@ -21,12 +21,21 @@ struct run {
 struct {
   struct spinlock lock;
   struct run *freelist;
-} kmem;
+} kmem[NCPU];
+// 为每个cpu创建一个kmem变量
 
 void
 kinit()
 {
-  initlock(&kmem.lock, "kmem");
+  char lockname[8];
+  //safestrcpy(lockname, "kmem_");
+  // init for each cpu
+  for(int i=0;i<NCPU;i++){
+    //lockname[5] = '0'+i;
+    snprintf(lockname, sizeof(lockname), "kmem_%d", i);
+    initlock(&kmem[i].lock, lockname);
+  }
+  
   freerange(end, (void*)PHYSTOP);
 }
 
@@ -56,10 +65,16 @@ kfree(void *pa)
 
   r = (struct run*)pa;
 
-  acquire(&kmem.lock);
-  r->next = kmem.freelist;
-  kmem.freelist = r;
-  release(&kmem.lock);
+  push_off(); // 关中断
+
+  int id = cpuid();
+  // 更改kmem
+  acquire(&kmem[id].lock);
+  r->next = kmem[id].freelist;
+  kmem[id].freelist = r;
+  release(&kmem[id].lock);
+
+  pop_off();// 开中断
 }
 
 // Allocate one 4096-byte page of physical memory.
@@ -70,11 +85,33 @@ kalloc(void)
 {
   struct run *r;
 
-  acquire(&kmem.lock);
-  r = kmem.freelist;
+  push_off();// 关中断
+
+  int id = cpuid();
+  acquire(&kmem[id].lock);
+  r = kmem[id].freelist;
   if(r)
-    kmem.freelist = r->next;
-  release(&kmem.lock);
+    kmem[id].freelist = r->next;
+  else{
+    int _id;// another cpu
+    // iterate free lists of all cpus
+    for(_id = 0; _id < NCPU; _id++){
+      if(_id == id)
+        continue;
+
+      acquire(&kmem[_id].lock);
+      if(kmem[_id].freelist){// find free space
+        r = kmem[_id].freelist;
+        kmem[_id].freelist = r->next;
+        release(&kmem[_id].lock);
+        break;
+      }
+      release(&kmem[_id].lock);
+    }
+  }
+  release(&kmem[id].lock);
+
+  pop_off();// 开中断
 
   if(r)
     memset((char*)r, 5, PGSIZE); // fill with junk
