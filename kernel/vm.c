@@ -432,3 +432,51 @@ copyinstr(pagetable_t pagetable, char *dst, uint64 srcva, uint64 max)
     return -1;
   }
 }
+
+
+const static char *level[] = {"..", ".. ..", ".. .. .."};
+
+/**
+* @param pagetable 页表打印表
+* @param depth 递归层数
+*/
+void
+vmprint(pagetable_t pagetable, uint64 depth)
+{
+  if(depth > 2) return;
+  if(depth == 0){
+    printf("page table %p", pagetable);
+  }
+  
+  char *buf = (char *)level[depth];
+
+  // from freewalk
+  for(int i = 0; i < 512; i++){
+    pte_t pte = pagetable[i];
+    if((pte & PTE_V)){
+      // this PTE points to a lower-level page table.
+      printf("%s%d: pte %p pa %p\n", buf, i, pte, PTE2PA(pte));
+      uint64 child = PTE2PA(pte);
+      vmprint((pagetable_t)child, depth + 1);
+    }
+  }
+}
+
+int
+vmpgaccess(pagetable_t pagetable, uint64 va)
+{
+  pte_t *pte;
+  if(va>=MAXVA){
+    return 0;
+  }
+
+  pte = walk(pagetable, va, 0);
+  if(pte==0){
+    return 0;
+  }
+  if((*pte & PTE_A)!=0){
+    *pte &= (~PTE_A); // PTE_A = 0
+    return 1;
+  }
+  return 0;
+}
