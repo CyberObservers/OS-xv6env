@@ -95,3 +95,32 @@ sys_uptime(void)
   release(&tickslock);
   return xticks;
 }
+
+// symlink
+uint64
+sys_symlink(void) {
+  char target[MAXPATH], path[MAXPATH];
+  struct inode* ip_path;
+
+  if(argstr(0, target, MAXPATH) < 0 || argstr(1, path, MAXPATH) < 0) {
+    return -1;
+  }
+
+  begin_op();
+  // 分配一个inode结点，create返回锁定的inode
+  ip_path = create(path, T_SYMLINK, 0, 0);
+  if(ip_path == 0) {
+    end_op();
+    return -1;
+  }
+  // 向inode数据块中写入target路径
+  if(writei(ip_path, 0, (uint64)target, 0, MAXPATH) < MAXPATH) {
+    iunlockput(ip_path);
+    end_op();
+    return -1;
+  }
+
+  iunlockput(ip_path);
+  end_op();
+  return 0;
+}
