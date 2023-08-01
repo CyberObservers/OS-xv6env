@@ -22,6 +22,7 @@ $ make qemu
 1.  阅读``user/``目录下的其他程序(如``user/echo.c``, ``user/grep.c``等)了解如何获取命令行参数.
 2.  新建``user/sleep.c``, 编写程序.用``int main(int argc, char **argv)``传参.``argv[0]``是可执行文件名; ``argc``是参数个数, 最小为1, 即argv[0]. 若``argc==1``则告知用户需要输入时间.若参数合法则调用系统调用sleep.最后退出程序.
 3.  更改``Makefile``中的``UPROGS``，加入``$U/_sleep\``
+
 #### 3. 遇到的问题及解决方法
 在xv6的用户态下程序不能调用``return 0``而应该用``exit(0)``.
 #### 4. 实验心得
@@ -139,14 +140,21 @@ echo 10 | xargs sleep # 相当于sleep 10
 
 ![xargs](E:\大二下\操作系统\课设文档\src\Lab01\xargs.bmp "xargs实验截图")
 
-## make grade截图
+### make grade截图
 
 ![grade-lab01](E:\大二下\操作系统\课设文档\src\Lab01\grade-lab01.bmp "lab 01 grade")
 
+### 代码位置
 
+`user/sleep.c`
 
+`user/pingpong.c`
 
-#### 1. 实验目的
-#### 2. 实验内容
-#### 3. 遇到的问题及解决方法
-#### 4. 实验心得
+`user/find.c`
+
+`user/primes.c`
+
+`user/xargs.c`
+
+`Makefile col:196~200`
+
