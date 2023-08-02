@@ -1,0 +1,4 @@
+pagetable 0 is the entry of user space, so it contains va of pages of user spaces and trampoline
+pagetable 2 contains heap.
+When executing the process, cpu can read data mapped by page table 1 becaues pagetable 1 contains trapframe.
+They contain heap, stack, guard page, data and text.

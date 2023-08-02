@@ -445,7 +445,7 @@ vmprint(pagetable_t pagetable, uint64 depth)
 {
   if(depth > 2) return;
   if(depth == 0){
-    printf("page table %p", pagetable);
+    printf("page table %p\n", pagetable);
   }
   
   char *buf = (char *)level[depth];
@@ -453,7 +453,7 @@ vmprint(pagetable_t pagetable, uint64 depth)
   // from freewalk
   for(int i = 0; i < 512; i++){
     pte_t pte = pagetable[i];
-    if((pte & PTE_V)){
+    if(pte & PTE_V){
       // this PTE points to a lower-level page table.
       printf("%s%d: pte %p pa %p\n", buf, i, pte, PTE2PA(pte));
       uint64 child = PTE2PA(pte);
