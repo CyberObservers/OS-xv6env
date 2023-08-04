@@ -62,23 +62,22 @@ kfree(void *pa)
     panic("kfree");
 
   acquire(&ref.lock);
-  if(--ref.cnt[(uint64)pa / PGSIZE] == 0){
+  if(--ref.cnt[(uint64)pa / PGSIZE] != 0){
     release(&ref.lock);
-    r = (struct run*)pa;
+    return;
+  } 
+  release(&ref.lock);
+  r = (struct run*)pa;
 
-    // Fill with junk to catch dangling refs.
-    memset(pa, 1, PGSIZE);
+  // Fill with junk to catch dangling refs.
+  memset(pa, 1, PGSIZE);
 
-    r = (struct run*)pa;
+  r = (struct run*)pa;
 
-    acquire(&kmem.lock);
-    r->next = kmem.freelist;
-    kmem.freelist = r;
-    release(&kmem.lock);
-  }
-  else{
-    release(&ref.lock);
-  }
+  acquire(&kmem.lock);
+  r->next = kmem.freelist;
+  kmem.freelist = r;
+  release(&kmem.lock);
 }
 
 // Allocate one 4096-byte page of physical memory.
