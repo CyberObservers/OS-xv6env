@@ -116,7 +116,7 @@ backtrace:
 
    
 
-4. 打断点，用`b xxx`命令。一般会打在main开头，`b main`。
+4. 打断点，用`b xxx`命令。一般会打在main开头，`b main`；或打在某一行，如`b trace.c:20`表示在`mkdir.c`的第20行打断点。
 
 5. 继续执行，用`c`命令。
 
