@@ -91,5 +91,52 @@ backtrace:
 
 
 
+## 附：gdb调试xv6代码
 
+### 调试步骤：
+
+1. 在一个终端输入`make qemu-gdb`，可以指定某一CPU执行，如`make CPUS=1 qemu-gdb`，在make qemu后会提示去另一个终端启动gdb，并给出此终端的端口号。
+
+   ![gdb-port](E:\大二下\操作系统\课设文档\src\Lab04\gdb-port.bmp)
+
+2. 新建一个终端，输入`gdb-multiarch kernel/kernel`，输入以下代码，注意端口号输自己的。
+
+   ```bash
+   (gdb) set architecture riscv:rv64
+   (gdb) target remote localhost:26000
+   ```
+
+   
+
+3. 加载文件。如果调试的是用户态文件，则需要加一个`user/`，如：
+
+   ```
+   (gdb) file user/mkdir
+   ```
+
+   
+
+4. 打断点，用`b xxx`命令。一般会打在main开头，`b main`。
+
+5. 继续执行，用`c`命令。
+
+6. 触发断点后，按步执行即可，以下给出gdb常用指令。
+
+   | 指令名       | 指令作用                        |
+   | ------------ | ------------------------------- |
+   | b            | 打断点                          |
+   | c            | 继续执行                        |
+   | layout split | 显示源代码和汇编代码            |
+   | ni           | 单步汇编执行，不进函数          |
+   | si           | 单步汇编执行，进入函数          |
+   | n            | 单步C语言执行，对应VS中“逐过程” |
+   | s            | 单步C语言执行，对应VS中“逐语句” |
+   | p $a0        | 打印a0寄存器中的值              |
+   | p/x 1536     | 以16进制格式打印1536            |
+   | i r a0       | a0寄存器信息                    |
+   | x/i 0x630    | 查看0x630地址处的指令           |
+
+### 调试效果
+
+![gdb](E:\大二下\操作系统\课设文档\src\Lab04\gdb.bmp)
 
