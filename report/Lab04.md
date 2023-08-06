@@ -53,7 +53,7 @@ backtrace:
 
 ### 实验截图
 
-![backtrace](E:\大二下\操作系统\课设文档\src\Lab04\backtrace.bmp "backtrace截图")
+![backtrace](..\src\Lab04\backtrace.bmp "backtrace截图")
 
 ## Alarm
 
@@ -97,7 +97,7 @@ backtrace:
 
 1. 在一个终端输入`make qemu-gdb`，可以指定某一CPU执行，如`make CPUS=1 qemu-gdb`，在make qemu后会提示去另一个终端启动gdb，并给出此终端的端口号。
 
-   ![gdb-port](E:\大二下\操作系统\课设文档\src\Lab04\gdb-port.bmp)
+   ![gdb-port](..\src\Lab04\gdb-port.bmp)
 
 2. 新建一个终端，输入`gdb-multiarch kernel/kernel`，输入以下代码，注意端口号输自己的。
 
@@ -138,5 +138,5 @@ backtrace:
 
 ### 调试效果
 
-![gdb](E:\大二下\操作系统\课设文档\src\Lab04\gdb.bmp)
+![gdb](..\src\Lab04\gdb.bmp)
 

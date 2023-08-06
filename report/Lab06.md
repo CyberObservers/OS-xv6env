@@ -24,7 +24,7 @@
 
 ### 实验截图
 
-![uthread](E:\大二下\操作系统\课设文档\src\Lab06\uthread.bmp)
+![uthread](..\src\Lab06\uthread.bmp)
 
 ## Using threads
 
@@ -47,7 +47,7 @@
 
 ### 实验截图
 
-![ph_safe](E:\大二下\操作系统\课设文档\src\Lab06\ph_safe.bmp)
+![ph_safe](..\src\Lab06\ph_safe.bmp)
 
 ## Barrier
 
@@ -76,11 +76,11 @@
 
 ### 实验截图
 
-![uthread](E:\大二下\操作系统\课设文档\src\Lab06\barrier.bmp)
+![uthread](..\src\Lab06\barrier.bmp)
 
 ## Make grade截图
 
-![uthread](E:\大二下\操作系统\课设文档\src\Lab06\grade-lab06.bmp)
+![uthread](..\src\Lab06\grade-lab06.bmp)
 
 
 

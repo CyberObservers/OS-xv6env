@@ -109,7 +109,7 @@ prime 5
 
 #### 5. 实验截图
 
-![find](E:\大二下\操作系统\课设文档\src\Lab01\find.bmp "find实验截图")
+![find](..\src\Lab01\find.bmp "find实验截图")
 
 
 ## xargs
@@ -138,11 +138,11 @@ echo 10 | xargs sleep # 相当于sleep 10
 
 #### 5. 实验截图
 
-![xargs](E:\大二下\操作系统\课设文档\src\Lab01\xargs.bmp "xargs实验截图")
+![xargs](..\src\Lab01\xargs.bmp "xargs实验截图")
 
 ### make grade截图
 
-![grade-lab01](E:\大二下\操作系统\课设文档\src\Lab01\grade-lab01.bmp "lab 01 grade")
+![grade-lab01](..\src\Lab01\grade-lab01.bmp "lab 01 grade")
 
 ### 代码位置
 

@@ -24,7 +24,7 @@
 
 ### 5. 实验截图
 
-![getpid](E:\大二下\操作系统\课设文档\src\Lab03\getpid.bmp "getpid实验截图")
+![getpid](..\src\Lab03\getpid.bmp "getpid实验截图")
 
 ## Print a page table
 
@@ -51,7 +51,7 @@
 
 ### 5. 实验截图
 
-![print](E:\大二下\操作系统\课设文档\src\Lab03\print.bmp "print pgtbl实验截图")
+![print](..\src\Lab03\print.bmp "print pgtbl实验截图")
 
 ## Detecting which pages have been accessed
 
@@ -79,11 +79,11 @@
 
 ### 5. 实验截图
 
-![detect](E:\大二下\操作系统\课设文档\src\Lab03\detect.bmp "detect实验截图")
+![detect](..\src\Lab03\detect.bmp "detect实验截图")
 
 ## Make grade 截图
 
-![grade-lab03](E:\大二下\操作系统\课设文档\src\Lab03\grade-lab03.bmp "lab03 grade")
+![grade-lab03](..\src\Lab03\grade-lab03.bmp "lab03 grade")
 
 ## 代码位置
 
