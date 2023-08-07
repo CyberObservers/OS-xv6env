@@ -219,7 +219,7 @@ bunpin(struct buf *b) {
   release(&bcache.buckets[bid].lock);
 }
 #else
-#define NBUCKET 5 
+#define NBUCKET 7 
 #define time_stamp timestamp
 struct {
   struct spinlock lock;
