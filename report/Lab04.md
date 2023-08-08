@@ -63,23 +63,26 @@ backtrace:
 
 ### 实验内容
 
+1. 在Makefile中将`alarmtest.c`添加至UPROGS；将sigalarm和sigreturn声明为系统调用（见lab03）；sigalarm接收参数（见lab03）；在盘`kernel/proc.h`中，修改proc结构体，增加`int ticks`（系统调用指定，表示经过几个时钟周期调用sigalarm）、`int ticks_cnt`、`tick_epc`（表示目前累积了多少时钟周期）、`uint64 handler`（中断函数地址）字段、`int handler_exec`（存储handler函数是否在被执行，防止二次进入）以及32个通用寄存器（用于保存和恢复现场），并在`allcoproc`中初始化。
+2. 在`kernel/trap.c`中添加store函数，存储32个通用寄存器
+3. 在`kernel/sysproc.c`中添加restore函数，恢复32个通用寄存器
+4. 在`kernel/trap.c`的`usertrap(void)`中，在`if(which_dev == 2)`的条件下，记录tick次数。若`ticks_cnt > ticks`，则保存现场，同时设置此时handler函数已被调用；用sigreturn恢复现场。
 
+### 遇到的问题及解决方法
 
-### 遇到的问题
-
-
+找不到函数指针在trapframe哪个寄存器里；一开始有点困惑该保留哪些寄存器，后来发现要全部保存......在测试时报错，说多次执行了handler，本来想通过同步互斥解决，但想了想感觉思路错了，最后在proc结构体里又加了一个字段……
 
 ### 实验心得
 
-
+在课上对这个trap机制不是很理解，通过实验理解保存的现场在PCB中；同时，完全掌握了内核态获取参数的方法。感觉在保存和恢复的时候可以用memcopy函数，但是没想那么多直接写了。总的来说，这个实验是实现两个系统调用，并修改usertrap。还是非常有收获的。
 
 ### 实验截图
 
-
+![alarm](..\src\Lab04\alarm.bmp)
 
 ## Make grade截图
 
-
+![grade-lab04](..\src\Lab04\grade-lab04.bmp)
 
 ## 代码位置
 
@@ -95,7 +98,7 @@ backtrace:
 
 ### 调试步骤：
 
-1. 在一个终端输入`make qemu-gdb`，可以指定某一CPU执行，如`make CPUS=1 qemu-gdb`，在make qemu后会提示去另一个终端启动gdb，并给出此终端的端口号。
+1. 在一个终端输入`make qemu-gdb`，可以指定CPU个数执行，如`make CPUS=1 qemu-gdb`，在make qemu后会提示去另一个终端启动gdb，并给出此终端的端口号。
 
    ![gdb-port](..\src\Lab04\gdb-port.bmp)
 
