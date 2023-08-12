@@ -274,11 +274,11 @@ echo 10 | xargs sleep # 相当于sleep 10
 
 ![xargs](E:/大二下/操作系统/课设文档/src/Lab01/xargs.bmp "xargs实验截图")
 
-### make grade截图
+## make grade截图
 
 ![grade-lab01](E:/大二下/操作系统/课设文档/src/Lab01/grade-lab01.bmp "lab 01 grade")
 
-### 代码位置
+## 代码位置
 
 `user/sleep.c`
 
@@ -354,15 +354,11 @@ lab01在用户态下通过系统调用实现内核态的操作。而lab02开始�
 
 #### 5. 实验截图
 
-
-
 ## make grade 截图
 
 ![grade-lab02](E:/大二下/操作系统/课设文档/src/Lab02/grade-lab02.bmp "lab02成绩")
 
-### 代码位置
-
-
+## 代码位置
 
 `kernel/proc.h` col: 109
 
@@ -465,17 +461,17 @@ lab01在用户态下通过系统调用实现内核态的操作。而lab02开始�
 
 ## 代码位置
 
-##### speed up system calls
+**speed up system calls**
 
 `kernel/proc.c` col: 130，159，227，211
 
-##### print a page table
+**print a page table**
 
 `kernel/exec.c` col: 121
 
 `kernel/vm.c` col: 444
 
-##### detecting which pages have been accessed
+**detecting which pages have been accessed**
 
 `kernel/sysproc.c`  col: 81
 
@@ -571,7 +567,7 @@ backtrace:
 
 ## 代码位置
 
-##### backtrace
+**backtrace**
 
 `kernel/printf.c` col: 137
 
@@ -778,7 +774,7 @@ COW fork()将使得释放用户内存的物理页面变得更加棘手。给定�
 
 ## 代码位置
 
-#### Uthread: switching between threadsd
+**Uthread: switching between threadsd**
 
 `user/uthread.c` col: 14, 33
 
@@ -786,11 +782,11 @@ COW fork()将使得释放用户内存的物理页面变得更加棘手。给定�
 
 `user/thread.c` col: 89, 104
 
-#### Using threads
+**Using threads**
 
 `notxv6/ph.c` col: 58
 
-#### Barrier
+**Barrier**
 
 `notxv6/barrier.c` col: 33
 
@@ -1025,5 +1021,4 @@ COW fork()将使得释放用户内存的物理页面变得更加棘手。给定�
 `kernel/trap.c`: 36, 132
 
 `kernel/proc.c`: 366
-
 
